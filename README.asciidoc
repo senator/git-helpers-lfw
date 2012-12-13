@@ -1,0 +1,44 @@
+Git Helpers by Lebbeous Fogle-Weekley (git-helpers-lfw)
+=======================================================
+
+The tools
+---------
+These tools are rough shortcuts for certain operations with 'git' in UNIX-like
+systems.
+
+Put them somewhere in your $PATH and you can invoke them just like other git
+commands (i.e., `git credit` and `git ff` and so on).
+
+git-credit
+~~~~~~~~~~
+Summarizes the information you would get from git blame about one or more
+tracked files.  Shows you the percentage of the total of lines in each file
+for which each author is responsible.
+
+git-ff
+~~~~~~
+Fast-foward your local tracking branch to the HEAD of the remote tracked
+branch.  Just shorthand for the full `git pull <remote> <branch>` command.
+
+git-find
+~~~~~~~~
+git-find is to find as git-grep is to grep.
+
+If you run it like so `git find myscript.pl` the `-name` test is implied.
+
+You can, however, run it like
+`git find -iname maybecamelcaseorsomething* -and -mmin 30`
+
+git-mlog
+~~~~~~~~
+Probably the least useful of the set of tools here, git-mlog is simply git-log
+with a certain, hardcoded single-line format for output that I happen to like.
+
+git-untrack
+~~~~~~~~~~~
+For the current local branch, drop tracking information about a remote branch.
+
+License
+-------
+
+GNU Public License (GPL) v2 or later.

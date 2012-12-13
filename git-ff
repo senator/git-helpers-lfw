@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# git-helpers-lfw for UNIX-like environments
+# Copyright (C) 2012  Lebbeous Fogle-Weekley
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+# Author email: lebbeous@gmail.com
+
+branch=`git status | head -1 | cut -d' ' -f4`
+if [ -z "$branch" ]; then
+	echo "Could not determine branch" 1>&2
+	exit 1
+fi
+
+rbranch=`git config --get branch.$branch.merge | cut -d/ -f3-`
+if [ -z "$rbranch" ]; then
+	echo "Warning: found no configured value at branch.$branch.merge" 1>&2
+	rbranch=$branch
+fi
+remote=`git config --get branch.$branch.remote`
+if [ -z "$remote" ]; then
+	echo "Could not determine remote" 1>&2
+	exit 2
+fi
+git pull --ff-only $remote $rbranch
+exit $?
